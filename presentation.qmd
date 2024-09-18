@@ -1,0 +1,66 @@
+---
+title: "Visualizing Spatial Data Using Google Maps"
+author: "Jack Bienvenue"
+date: "09.18.2024"
+format: 
+    revealjs:
+        theme: default
+---
+# Understanding Spatial Data
+
+## What makes spatial data special?
+
+- Geocoding
+- Vector and Raster Operations
+
+---
+
+---
+
+# Spatial Data Handling Platforms
+
+## Platforms for processing/ visualizing spatial data:
+
+- R
+- Python
+- ArcGIS
+
+# Working with Google Maps
+
+## Preliminary: What is an API?
+
+## Using Google Maps 
+To get started, in Chrome navigate to:
+
+**console.cloud.google.com**
+
+
+Steps I did:
+1. mapsplatform.google.com --> Maps Datasets --> Click 'API' button
+2. 'Get started with google maps platform'
+3. 'Create new project'
+4. Name project 'NYC Open Data Crashes'
+    - ID nyc-open-data-crashes
+5. Left bar -> APIs & Services
+    - Library
+6. Maps JavaScript API
+    - Enable
+    - This brought me to an account info page
+        - Payment info
+7. Welcome Questions
+    - Industry
+    - What will you learn about
+    - Development approach
+    - What platforms
+    - Framework
+        -react 
+    'Go to google maps platform'
+8. 'Protect your API key'
+    - Maybe later
+9. Back to console.cloud page, skip any options
+10. 
+
+My first project:
+API key: AIzaSyCW3MxADj1mC6V9fQxEiGngNJZytDXgr9c
+NYC Open Data Crashes:
+AIzaSyAfmyn2d8OzDSI10pJ-lnCbsexZmiLIwx0
