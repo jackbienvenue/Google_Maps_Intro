@@ -1,0 +1,24 @@
+---
+title: "Data Prep for Presentation"
+author: "Jack Bienvenue"
+date: "2024-09-18"
+output:
+    html: default
+---
+
+Below, we will remove all entries with missing geocodes, as this will raise an error when we enter the dataset into Google Maps.
+
+So, let's do the following:
+
+``` {python}
+import pandas as pd
+
+df = pd.read_csv('data/cleaned_crash_data.csv')
+
+newdf = df.dropna(subset=['latitude', 'longitude'])
+```
+
+``` {python}
+#Export of cleaned data
+newdf.to_csv('google_maps_crash_import_data.csv', index = False)
+```
