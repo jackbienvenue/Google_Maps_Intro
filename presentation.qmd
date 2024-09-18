@@ -6,7 +6,7 @@ format:
     revealjs:
         theme: default
 ---
-# Understanding Spatial Data
+# Spatial Data
 
 ## What makes spatial data special?
 
@@ -24,10 +24,43 @@ format:
 - R
 - Python
 - ArcGIS
-
+- Google
+    - Google MyMaps
+    - Google Maps
+    - Google Earth Engine
+---
 # Working with Google Maps
+---
+## Preliminaries
+A few notes before introducing visualization with Google Maps. 
+---
+### Google MyMaps
+Google MyMaps is a tool that can help us visualize spatial data. Upload data to MyMaps by: 
 
-## Preliminary: What is an API?
+1. Creating a .csv with all entries where geocodes are present
+2. Uploading that to your Google Drive
+3. Uploading from your drive on the MyMaps webpage
+
+---
+<div style="display: flex;">
+
+<div style="flex: 1; padding: 10px;">
+### Pros
+- Ease of use
+- Features can be placed in the UI itself
+- Collaboration is possible
+</div>
+
+<div style="flex: 1; padding: 10px;">
+### Cons
+- Very basic visualization 
+- Replicability issues
+- Low data size limit (~1 MB)
+</div>
+
+</div>
+
+### What is an API?
 
 ## Using Google Maps 
 To get started, in Chrome navigate to:
