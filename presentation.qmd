@@ -62,6 +62,18 @@ Google MyMaps is a tool that can help us visualize spatial data. Upload data to 
 
 ### What is an API?
 
+API:
+
+**Application Programming Interface**
+
+API key:
+
+Like a password to access your creation
+
+JSON:
+
+Javascript Objection Notation
+
 ## Using Google Maps 
 To get started, in Chrome navigate to:
 
@@ -91,7 +103,30 @@ Steps I did:
 8. 'Protect your API key'
     - Maybe later
 9. Back to console.cloud page, skip any options
-10. 
+10. Map management
+    - Create new map ID
+    - Name, Describe
+    - JavaScript
+    - VECTOR
+11. Create Style
+    - Apply style by returning to Map Management
+12. Create directory
+    - index.html
+        -! Emmet shortcut to add boilerplate html
+        - Retitle (line 6)
+        - add link tag for style.css under title line
+            - <link rel="stylesheet" href = "style.css">
+        - add js reference
+            - Idented <script src="script.js"></script> between <body> tags on lines 9 and 11
+    - style.css
+    - script.jb
+
+    mkdir map_files
+    cd map_files
+    touch index.html style.css script.js  # macOS/Linux
+
+13. I got live server extension
+    -> Hit go live bottom right of VSCode
 
 My first project:
 API key: AIzaSyCW3MxADj1mC6V9fQxEiGngNJZytDXgr9c
