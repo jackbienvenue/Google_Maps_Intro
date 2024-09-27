@@ -188,6 +188,7 @@ We'll use the standardized nyccrashes_cleaned.feather file provided in the cours
 ``` {python}
 import pandas as pd
 import gmplot
+import os
 df = pd.read_feather('data/nyccrashes_cleaned.feather')
 ```
 
@@ -196,42 +197,68 @@ df = pd.read_feather('data/nyccrashes_cleaned.feather')
 Here's some example code for gmplot using the cleaned NYC Crashes Dataset:
 
 ``` python
-## Load the dataset, using pd.read_feather()
+import os
+import pandas as pd
+import gmplot
+
+# Load the dataset using pd.read_feather()
 df = pd.read_feather('data/nyccrashes_cleaned.feather')
 
-## Insert API key
+#NaN values prevent plotting, let's remove them:
+df = df.dropna(subset=['latitude', 'longitude'])
+
+# Insert API key (substitute with your own!)
 api_key = 'AIzaSyCaa4gF3dPz3-IqJnjKxi2tXo0gmwivux0'
 
-## Center the map on NYC using mean center
+# Center the map on NYC using the mean center
 center_lat = df['latitude'].mean()
 center_lon = df['longitude'].mean()
 
-## Create gmplot object (third argument is the zoom)
-gmap = gmplot.GoogleMapPlotter(center_lat, center_lon, 5, apikey = api_key)
+# Create gmplot object (third argument is the zoom level)
+gmap = gmplot.GoogleMapPlotter(center_lat, center_lon, 11, apikey=api_key)
 
-## Create lists for latitudes and longitudes
-latitudes = []
-longitudes = []
+# Extract latitudes and longitudes directly
+latitudes = df['latitude'].tolist()
+longitudes = df['longitude'].tolist()
 
-## Iterate through the DataFrame and collect latitudes and longitudes
-for index, row in df.iterrows():
-    latitudes.append(row['latitude'])
-    longitudes.append(row['longitude'])
+# Plot all points at once
+gmap.scatter(latitudes, longitudes, marker=True, size=20, color='red')
 
-## Now plot all points at once
-gmap.scatter(latitudes, longitudes, marker=True, size=40, color='red')
+# Define output path
+output_dir = "map_outputs"
+output_path = os.path.join(output_dir, "nyccrashes_map.html")
 
-## Save the map
-gmap.draw("nyccrashes_map.html")
+# Create the output directory if it doesn't exist
+os.makedirs(output_dir, exist_ok=True)
+
+# Save the map
+gmap.draw(output_path)
 ```
 
 ## gmplot example code output:
 
+You would retrieve this as an html generated in the specified directory, but for this presentation I'll show this as an image:
 
+![Output of example code](Images/gmplot_output.png)
 
 ## googlemaps
 
 We can use googlemaps for advanced functionality. 
+
+``` python
+# Now create a heatmap
+gheatmap = gmplot.GoogleMapPlotter(center_lat, center_lon, 12, apikey=api_key)  # New gmplot object for heatmap
+
+# Make heatmap:
+gheatmap.heatmap(latitudes, longitudes, radius=20)
+
+# Define output path for the heatmap
+output_dir = "map_outputs"
+heatmap_output_path = os.path.join(output_dir, "nyccrashes_heatmap.html")
+
+# Save the heatmap
+gheatmap.draw(heatmap_output_path)
+```
 
 
 # Conclusion
