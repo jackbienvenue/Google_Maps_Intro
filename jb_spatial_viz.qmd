@@ -12,11 +12,11 @@ format:
 
 ```{css}
 .scrollable {
-    height: 300px; /* Adjust height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 10px; /* Optional padding */
-    border: 1px solid #ccc; /* Optional border for visibility */
-    background-color: #f9f9f9; /* Optional background color */
+    height: 300px; 
+    overflow-y: auto;
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    background-color: #f9f9f9; 
 }
 ```
 
@@ -241,32 +241,39 @@ You would retrieve this as an html generated in the specified directory, but for
 
 ![Output of example code](Images/gmplot_output.png)
 
-## googlemaps
+## gmplot: Heat Maps
 
-We can use googlemaps for advanced functionality. 
+Here's some example code for a heat map:
 
 ``` python
 # Now create a heatmap
-gheatmap = gmplot.GoogleMapPlotter(center_lat, center_lon, 12, apikey=api_key)  # New gmplot object for heatmap
 
-# Make heatmap:
-gheatmap.heatmap(latitudes, longitudes, radius=20)
+# Create a new gmplot object for the heatmap
+heatmap = gmplot.GoogleMapPlotter(center_lat, center_lon, 11,
+          apikey=api_key)
 
-# Define output path for the heatmap
-output_dir = "map_outputs"
+# Plot the heatmap
+heatmap.heatmap(latitudes, longitudes)
+
+# Define output path for heatmap
 heatmap_output_path = os.path.join(output_dir, "nyccrashes_heatmap.html")
 
 # Save the heatmap
-gheatmap.draw(heatmap_output_path)
+heatmap.draw(heatmap_output_path)
 ```
 
+## gmplot Heat Map Example
+
+![Heat map output; *Remark: multiple gmplot html outputs might not reliably work for a single script*](Images/heatmap_output.png)
 
 # Conclusion
 
+## Geospatial Visualization
 
+There are a range of different geospatial visualization platforms.
 
-## Acknowledgements:
+But, using Python, you can do all the spatial visualization you need right in your code!
 
 ## Thank you!
 
-Best of luck exploring Google Maps Platform as a way to visualize your spatial data!
+Best of luck with your spatial data visualization!
