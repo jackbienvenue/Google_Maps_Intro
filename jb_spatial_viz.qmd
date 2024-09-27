@@ -1,0 +1,245 @@
+---
+title: "Visualizing Spatial Data Using Google Maps"
+subtitle: "Introduction to Data Science | Fall 2024"
+author: "Jack Bienvenue"
+date: "2024-09-30"
+format:
+  revealjs: 
+    theme: default
+    preview-links: true
+    slide-number: true
+---
+
+```{css}
+.scrollable {
+    height: 300px; /* Adjust height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Optional padding */
+    border: 1px solid #ccc; /* Optional border for visibility */
+    background-color: #f9f9f9; /* Optional background color */
+}
+```
+
+# Introducing Spatial Data
+
+## Preface: Having Fun with Spatial Data
+
+Spatial data handling and visualization introduces new challenges, softwares, and packages.
+
+Spatial data operations can be time-consuming and the pathway to your desired results is often unclear.
+
+**Stay patient, have fun**
+
+## Preface: Having Fun with Spatial Data
+
+![Map of all the locations in NYC where I have eaten a bagel](Images/Bagels_map.png)
+
+## Why Spatial Data?
+
+**Spatial trends matter**. They allow us to:
+
+- Understand geographic localizations of trends
+    - Unveil hidden trends
+- Evaluate how social factors may influence trends
+    - Create information to address disparities
+- Provide recommendations to relevant local authorities
+
+
+# Google & Spatial Data
+
+## Google Spatial Data Products:
+
+Google offers several products for performing Geographic Information Science (GIS) tasks. These include:
+
+- Google MyMaps
+    - A simple, no-code way to visualize data
+- Google Earth Engine
+    - Enhanced computing capabilities for analytic tasks
+- Google Maps Platform
+    - Comprehensive map construction, focused on visualization
+
+## Google MyMaps
+
+Google MyMaps allows for visualization of line and point data. 
+
+![Image of MyMaps UI. As we can see, there is a very small extent of functionality.](Images/MyMap.png)
+
+## Google Earth Engine
+
+Google Earth Engine is primarily used for **remote sensing** applications. It uses JavaScript.
+
+It pairs well with landcover classification to aid in tasks like:
+
+- Landcover Classification
+    - Tracking deforestation
+    - Habitat Monitoring
+    - **Solar Panel Identification**
+
+## Google Earth Engine Example
+
+Here's an example of Google Earth Engine being used to identify commercial solar properties to fill in missing data:
+
+![Example of Landcover classifcation model in GEE](Images/GEE_example.png)
+
+## Google Maps Platform
+
+Google Maps Platform significantly broadens capabilities. 
+
+It allows us to perform tasks such as:
+
+- Coalescing nearby points into clusters for zooming
+- Creating heat maps from point data
+- Embedding maps into websites
+- Automatically translating a map into a user's language
+- 3D geospatial visualization
+- and more!
+
+# Getting Started in Google Maps Platform
+
+## Why Google Maps Platform?
+
+Google Maps Platform uses Google Cloud computing. We must log in and do some setup there first.
+
+We want to be able to include maps right inside of our Python code, so Google Maps will be our platform of choice. 
+
+## Google Cloud Platform
+
+Google Cloud Platform [is accessible here.](https://console.cloud.google.com/)
+
+UConn terminated Google accounts in 2024, so to access Google Cloud Console, sign in with your **personal email**.
+
+## Accessing the console
+To access Google Maps Platform, we must enter our Google Cloud Console.
+
+Navigate to console.cloud.google.com to view your console. It should look like this. Press "select project" and create your new project. 
+
+![](Images/Select_Project.png)
+
+## Building Project
+
+→ "Select a Project"
+
+→ "New Project"
+
+→ Name your project, set location as 'No Organization'
+
+→ "Create"
+
+→ Select newly created project
+
+→ Next, we'll set up an API key in the following slides
+
+## API: What is an API?
+
+API stands for "Application Programming Interface." 
+
+**Google Maps API** is a set of tools allowing us to perform tasks like:
+
+- Visualizing data and embedding it into websites
+- Route finding
+- 3D map viewing
+    - Street view, etc. 
+- And more!
+
+## API: What are API keys?
+
+An API Key allows us to access our projects **exclusively**
+
+Generate an API key for your Maps project in Google Cloud here:
+
+![Where to navigate to generate API key](Images/Make_API_key.png)
+
+## API: Enabling necessary APIs
+
+In this example, we will visualize our data as a heat map. For this we will need to enable the following APIs:
+
+- Maps JavaScript API
+- Maps Datasets API
+- Places API
+
+*(Select 'APIs and Services' from the left sidebar to access)*
+
+## Python and Google Maps
+
+Let's begin by downloading our packages in terminal or an equivalent command shell:
+
+``` zsh
+% pip install googlemaps 
+% pip install gmplot
+```
+
+Now we can start working with Google Maps in Python!
+
+- googlemaps
+    - Provides access to Google Maps Platform services in a Python client
+- gmplot
+    - Primarily for plotting
+
+# Using googlemaps and gmplot
+
+## gmplot: Initialization
+
+We'll use the standardized nyccrashes_cleaned.feather file provided in the coursenotes for our examples. 
+
+``` zsh
+% pip install pyarrow
+```
+
+``` {python}
+import pandas as pd
+import gmplot
+df = pd.read_feather('data/nyccrashes_cleaned.feather')
+```
+
+## gmplot
+
+Here's some example code for gmplot using the cleaned NYC Crashes Dataset:
+
+``` python
+## Load the dataset, using pd.read_feather()
+df = pd.read_feather('data/nyccrashes_cleaned.feather')
+
+## Insert API key
+api_key = 'AIzaSyCaa4gF3dPz3-IqJnjKxi2tXo0gmwivux0'
+
+## Center the map on NYC using mean center
+center_lat = df['latitude'].mean()
+center_lon = df['longitude'].mean()
+
+## Create gmplot object (third argument is the zoom)
+gmap = gmplot.GoogleMapPlotter(center_lat, center_lon, 5, apikey = api_key)
+
+## Create lists for latitudes and longitudes
+latitudes = []
+longitudes = []
+
+## Iterate through the DataFrame and collect latitudes and longitudes
+for index, row in df.iterrows():
+    latitudes.append(row['latitude'])
+    longitudes.append(row['longitude'])
+
+## Now plot all points at once
+gmap.scatter(latitudes, longitudes, marker=True, size=40, color='red')
+
+## Save the map
+gmap.draw("nyccrashes_map.html")
+```
+
+## gmplot example code output:
+
+
+
+## googlemaps
+
+We can use googlemaps for advanced functionality. 
+
+
+# Conclusion
+
+
+
+## Acknowledgements:
+
+## Thank you!
+
+Best of luck exploring Google Maps Platform as a way to visualize your spatial data!
